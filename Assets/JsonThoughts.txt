@@ -1,0 +1,21 @@
+It looks like there are 2 possibilities to use the Json file.
+
+1. Do it frame by frame and asign everything from one general manager
+2. Have each character controll itself by giving all of one player data to it at the beginning.
+
+
+Pros for 1.
+Can replace the replay file with other replay files easily
+The score and time would be easy with this system
+Everything for every frame will be available in one place. (can also be a con at the same time)
+
+Cons for 1
+Harder to do interpolation (if needed, like when missing frames or framerate is not enough)
+
+
+Pros for 2
+Less logic for the general manager script
+Easier interpolation for missing keyframes etc, because it can work towards the next keyframe, and not care about the rest
+
+Cons for 2
+Requires a scan trough all data at the beginning
