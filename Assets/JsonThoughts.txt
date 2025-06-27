@@ -8,6 +8,7 @@ Pros for 1.
 Can replace the replay file with other replay files easily
 The score and time would be easy with this system
 Everything for every frame will be available in one place. (can also be a con at the same time)
+## If you want to add a playback system, it would be easier to do it this way (one of my plans)
 
 Cons for 1
 Harder to do interpolation (if needed, like when missing frames or framerate is not enough)
