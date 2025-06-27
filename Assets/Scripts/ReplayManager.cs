@@ -6,8 +6,7 @@ public class ReplayManager : MonoBehaviour
 {
     // Singleton instance
     public static ReplayManager instance;
-
-    private TextAsset jsonFile;
+    private static TextAsset jsonFile;
 
     void Awake()
     {
@@ -32,9 +31,20 @@ public class ReplayManager : MonoBehaviour
     }
 
     // Initialize the replay system
+    // Used https://docs.unity3d.com/ScriptReference/JsonUtility.FromJson.html
     private void InitializeReplaySystem()
     {
-        
+        string frame0 = GetJsonFrame(0);
+        JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
+
+
+
         Debug.Log("Replay system initialized.");
+    }
+
+    private string GetJsonFrame(int frameindex)
+    {
+
+        return "";
     }
 }
