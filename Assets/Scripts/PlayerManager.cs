@@ -69,7 +69,6 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdatePlayerPositions(JsonFormat jsonData)
     {
-        // Get every player and set their position and rotation based on the JSON for this frame
         foreach (var person in jsonData.Persons)
         {
             PlayerInstance player = GetPlayerById(person.Id);
@@ -77,7 +76,7 @@ public class PlayerManager : MonoBehaviour
             {
                 Vector3 newposition = new Vector3(person.Position[0], person.Position[1], person.Position[2]);
                 player.PlayerObject.transform.position = newposition;
-                // Update rotation if there is data
+                // Update rotation if needed
                 if (person.PersonContext.MovementOrientation != null)
                 {
                     Quaternion newrotation = Quaternion.Euler(0, person.PersonContext.MovementOrientation, 0);
