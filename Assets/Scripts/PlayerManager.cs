@@ -41,15 +41,15 @@ public class PlayerManager : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(0, person.PersonContext.MovementOrientation, 0);
         Vector3 position = new Vector3(person.Position[0], person.Position[1], person.Position[2]);
-        GameObject playerObject = Instantiate(playerPrefab, position, rotation);
+        GameObject playerobject = Instantiate(playerPrefab, position, rotation);
 
-        PlayerInstance playerInstance = new PlayerInstance
+        PlayerInstance playerinstance = new PlayerInstance
         {
             Id = person.Id,
-            PlayerObject = playerObject,
+            PlayerObject = playerobject,
             Speed = person.Speed
         };
-        playerInstances.Add(playerInstance);
+        playerInstances.Add(playerinstance);
     }
 
     public void UpdatePlayerPositions(JsonFormat jsonData)
@@ -59,13 +59,13 @@ public class PlayerManager : MonoBehaviour
             PlayerInstance player = GetPlayerById(person.Id);
             if (player != null)
             {
-                Vector3 newPosition = new Vector3(person.Position[0], person.Position[1], person.Position[2]);
-                player.PlayerObject.transform.position = newPosition;
+                Vector3 newposition = new Vector3(person.Position[0], person.Position[1], person.Position[2]);
+                player.PlayerObject.transform.position = newposition;
                 // Update rotation if needed
                 if (person.PersonContext.MovementOrientation != null)
                 {
-                    Quaternion newRotation = Quaternion.Euler(0, person.PersonContext.MovementOrientation, 0);
-                    player.PlayerObject.transform.rotation = newRotation;
+                    Quaternion newrotation = Quaternion.Euler(0, person.PersonContext.MovementOrientation, 0);
+                    player.PlayerObject.transform.rotation = newrotation;
                 }
             }
             else

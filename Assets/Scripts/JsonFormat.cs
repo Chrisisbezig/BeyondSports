@@ -33,7 +33,8 @@ public class PersonContext
 [System.Serializable]
 public class Ball
 {
-    public Vector3 Position;
+    public int Id;
+    public float[] Position;
     public int Speed;
     public float MovementOrientation;
 }

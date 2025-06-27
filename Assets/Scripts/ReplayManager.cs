@@ -45,6 +45,7 @@ public class ReplayManager : MonoBehaviour
         JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
 
         PlayerManager.instance.InitializePlayers(startingframe);
+        BallManager.instance.InitializeBall(startingframe);
 
         StartCoroutine(ReplaySystem());
         Debug.Log("Replay system initialized.");
@@ -58,7 +59,7 @@ public class ReplayManager : MonoBehaviour
             string frame0 = frameData[i];
             JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
             
-
+            BallManager.instance.UpdateBallPositions(startingframe);
             PlayerManager.instance.UpdatePlayerPositions(startingframe);
         }
     }
