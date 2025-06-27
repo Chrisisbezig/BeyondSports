@@ -39,7 +39,7 @@ public class ReplayManager : MonoBehaviour
         JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
 
         Debug.Log($"Frame={startingframe.FrameCount}, Time={startingframe.TimestampUTC}"); // WORKS
-        Debug.Log($"Players={startingframe.Players.Count}"); // Doesnt work
+        Debug.Log($"Persons={startingframe.Persons.Length}"); // Doesnt work
 
         PlayerManager.instance.InitializePlayers(startingframe);
 

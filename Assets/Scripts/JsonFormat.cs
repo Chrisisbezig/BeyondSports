@@ -6,13 +6,13 @@ public class JsonFormat
 {
     public int FrameCount;
     public int TimestampUTC;
-    public List<Player> Players = new List<Player>();
+    public Persons[] Persons;
     public Ball Ball;
     public GameClockContext GameClock;
     public MatchScoreContext MatchScore;
 }
 
-public class Player
+public class Persons
 {
     public int Id;
     public Vector3 Position;

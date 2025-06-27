@@ -25,29 +25,30 @@ public class PlayerManager : MonoBehaviour
 
     public void InitializePlayers(JsonFormat jsonData)
     {
-        foreach (var player in jsonData.Players)
+        foreach (var person in jsonData.Persons)
         {
-            CreatePlayer(player);
+            CreatePlayer(person);
         }
     }
 
-    private void CreatePlayer(Player player)
+    private void CreatePlayer(Persons persons)
     {
         float yrotation = 0;
-        if (player.MovementOrientation != null)
+        if (persons.MovementOrientation != null)
         {
-            yrotation = player.MovementOrientation;
+            yrotation = persons.MovementOrientation;
         }
 
-        Quaternion rotation = Quaternion.Euler(0, player.MovementOrientation, 0);
-        GameObject playerObject = Instantiate(playerPrefab, player.Position, rotation);
+        Quaternion rotation = Quaternion.Euler(0, persons.MovementOrientation, 0);
+        GameObject playerObject = Instantiate(playerPrefab, persons.Position, rotation);
 
         PlayerInstance playerInstance = new PlayerInstance
         {
-            Id = player.Id,
+            Id = persons.Id,
             PlayerObject = playerObject,
-            Speed = player.Speed
+            Speed = persons.Speed
         };
+        playerInstances.Add(playerInstance);
     }
 }
 
