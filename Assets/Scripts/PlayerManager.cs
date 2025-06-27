@@ -41,6 +41,13 @@ public class PlayerManager : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(0, player.MovementOrientation, 0);
         GameObject playerObject = Instantiate(playerPrefab, player.Position, rotation);
+
+        PlayerInstance playerInstance = new PlayerInstance
+        {
+            Id = player.Id,
+            PlayerObject = playerObject,
+            Speed = player.Speed
+        };
     }
 }
 
@@ -48,5 +55,5 @@ public class PlayerInstance
 {
     public int Id;
     public GameObject PlayerObject;
-    public Vector3 Position;
+    public float Speed;
 }

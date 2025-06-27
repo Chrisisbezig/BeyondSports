@@ -7,7 +7,7 @@ public class JsonFormat
     public int FrameCount;
     public int TimestampUTC;
     public List<Player> Players = new List<Player>();
-
+    public Ball Ball;
     public GameClockContext GameClock;
     public MatchScoreContext MatchScore;
 }
@@ -16,10 +16,17 @@ public class Player
 {
     public int Id;
     public Vector3 Position;
-    public int Speed;
+    public float Speed;
     public float MovementOrientation;
     public int TeamSide;
     public int JerseyNumber;
+}
+
+public class Ball
+{
+    public Vector3 Position;
+    public int Speed;
+    public float MovementOrientation;
 }
 
 public class MatchScoreContext
@@ -30,8 +37,8 @@ public class MatchScoreContext
 
 public class GameClockContext
 {
-    private int Period;
-    private int Minute;
-    private int Second;
-    private int InjuryTime;
+    public int Period;
+    public int Minute;
+    public int Second;
+    public int InjuryTime;
 }
