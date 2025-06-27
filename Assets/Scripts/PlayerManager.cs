@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -59,6 +60,7 @@ public class PlayerManager : MonoBehaviour
     {
         personObject.name = $"Player_{person.Id}";
         personObject.GetComponent<MeshRenderer>().material = TeamColors[person.TeamSide];
+        personObject.GetComponentInChildren<TextMeshProUGUI>().text = person.JerseyNumber.ToString();
     }
 
     public void UpdatePlayerPositions(JsonFormat jsonData)
