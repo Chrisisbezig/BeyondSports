@@ -10,7 +10,7 @@ public class ReplayManager : MonoBehaviour
     private static TextAsset jsonFile;
     private static string[] frameData;
 
-    [SerializeField, Range(0.1f, 5f)] private float replaySpeed = 1.0f;
+    [Range(0.1f, 5f)] public float replaySpeed = 1.0f;
 
     [SerializeField] public Color refereeColor;
     [SerializeField] public Color team1Color;
