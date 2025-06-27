@@ -51,6 +51,36 @@ public class PlayerManager : MonoBehaviour
         };
         playerInstances.Add(playerInstance);
     }
+
+    public void UpdatePlayerPositions(JsonFormat jsonData)
+    {
+        foreach (var person in jsonData.Persons)
+        {
+            PlayerInstance player = GetPlayerById(person.Id);
+            if (player != null)
+            {
+                Vector3 newPosition = new Vector3(person.Position[0], person.Position[1], person.Position[2]);
+                player.PlayerObject.transform.position = newPosition;
+                // Update rotation if needed
+                if (person.PersonContext.MovementOrientation != null)
+                {
+                    Quaternion newRotation = Quaternion.Euler(0, person.PersonContext.MovementOrientation, 0);
+                    player.PlayerObject.transform.rotation = newRotation;
+                }
+            }
+            else
+            {
+                // Create player if doesnt exist, incase of substitution or whatever
+                CreatePlayer(person);
+            }
+        }
+    }
+
+    // To easily find a player by ID
+    public PlayerInstance GetPlayerById(int id)
+    {
+        return playerInstances.Find(player => player.Id == id);
+    }
 }
 
 public class PlayerInstance

@@ -8,6 +8,9 @@ public class ReplayManager : MonoBehaviour
     // Singleton instance
     public static ReplayManager instance;
     private static TextAsset jsonFile;
+    private static string[] frameData;
+
+    [SerializeField] private float replaySpeedFps = 1.0f;
 
     void Awake()
     {
@@ -35,15 +38,29 @@ public class ReplayManager : MonoBehaviour
     // Used https://docs.unity3d.com/ScriptReference/JsonUtility.FromJson.html
     private void InitializeReplaySystem()
     {
-        string frame0 = GetJsonFrame(0);
-        JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
+        // Split the Json into frames
+        CalculateJsonFrames();
 
-        Debug.Log($"Frame={startingframe.FrameCount}, Time={startingframe.TimestampUTC}"); // WORKS
-        Debug.Log($"Persons={startingframe.Persons.Count}"); // works
+        string frame0 = frameData[0];
+        JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
 
         PlayerManager.instance.InitializePlayers(startingframe);
 
+        StartCoroutine(ReplaySystem());
         Debug.Log("Replay system initialized.");
+    }
+
+    private IEnumerator ReplaySystem()
+    {
+        for (int i = 0; i < frameData.Length; i++)
+        {
+            yield return new WaitForSeconds(1 / replaySpeedFps);
+            string frame0 = frameData[i];
+            JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
+            
+
+            PlayerManager.instance.UpdatePlayerPositions(startingframe);
+        }
     }
 
     // Gets the JSON frame data for a specific frame index
@@ -51,10 +68,8 @@ public class ReplayManager : MonoBehaviour
     // String information
     // https://learn.microsoft.com/en-us/dotnet/api/system.string?view=net-9.0&redirectedfrom=MSDN
     // https://learn.microsoft.com/en-us/dotnet/csharp/how-to/parse-strings-using-split
-    private string GetJsonFrame(int frameindex)
+    private void CalculateJsonFrames()
     {
-        string[] frameData = jsonFile.text.Split(new char[] { '\t', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
-        Debug.Log($"Data: {frameData[frameindex]}");
-        return frameData[frameindex];
+        frameData = jsonFile.text.Split(new char[] { '\t', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
     }
 }
