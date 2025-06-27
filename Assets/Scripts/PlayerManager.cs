@@ -27,6 +27,10 @@ public class PlayerManager : MonoBehaviour
 
     public void InitializePlayers(JsonFormat jsonData)
     {
+        TeamColors[0].color = ReplayManager.instance.refereeColor;
+        TeamColors[1].color = ReplayManager.instance.team1Color;
+        TeamColors[2].color = ReplayManager.instance.team2Color;
+
         foreach (var person in jsonData.Persons)
         {
             CreatePlayer(person);

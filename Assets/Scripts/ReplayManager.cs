@@ -12,6 +12,10 @@ public class ReplayManager : MonoBehaviour
 
     [SerializeField] private float replaySpeedFps = 1.0f;
 
+    [SerializeField] public Color refereeColor;
+    [SerializeField] public Color team1Color;
+    [SerializeField] public Color team2Color;
+
     void Awake()
     {
         if (instance == null)
@@ -46,6 +50,7 @@ public class ReplayManager : MonoBehaviour
 
         PlayerManager.instance.InitializePlayers(startingframe);
         BallManager.instance.InitializeBall(startingframe);
+        ScoreManager.instance.InitializeScore(startingframe);
 
         StartCoroutine(ReplaySystem());
         Debug.Log("Replay system initialized.");
@@ -61,6 +66,7 @@ public class ReplayManager : MonoBehaviour
             
             BallManager.instance.UpdateBallPositions(startingframe);
             PlayerManager.instance.UpdatePlayerPositions(startingframe);
+            ScoreManager.instance.UpdateScore(startingframe);
         }
     }
 
