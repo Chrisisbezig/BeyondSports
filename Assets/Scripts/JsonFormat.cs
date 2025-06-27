@@ -17,7 +17,7 @@ public class JsonFormat
 public class Person
 {
     public int Id;
-    public Vector3 Position;
+    public float[] Position;
     public float Speed;
     public int TeamSide;
     public int JerseyNumber;

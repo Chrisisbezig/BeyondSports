@@ -40,7 +40,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         Quaternion rotation = Quaternion.Euler(0, person.PersonContext.MovementOrientation, 0);
-        GameObject playerObject = Instantiate(playerPrefab, person.Position, rotation);
+        Vector3 position = new Vector3(person.Position[0], person.Position[1], person.Position[2]);
+        GameObject playerObject = Instantiate(playerPrefab, position, rotation);
 
         PlayerInstance playerInstance = new PlayerInstance
         {
