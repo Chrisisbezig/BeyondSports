@@ -31,22 +31,22 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void CreatePlayer(Persons persons)
+    private void CreatePlayer(Person person)
     {
         float yrotation = 0;
-        if (persons.MovementOrientation != null)
+        if (person.PersonContext.MovementOrientation != null)
         {
-            yrotation = persons.MovementOrientation;
+            yrotation = person.PersonContext.MovementOrientation;
         }
 
-        Quaternion rotation = Quaternion.Euler(0, persons.MovementOrientation, 0);
-        GameObject playerObject = Instantiate(playerPrefab, persons.Position, rotation);
+        Quaternion rotation = Quaternion.Euler(0, person.PersonContext.MovementOrientation, 0);
+        GameObject playerObject = Instantiate(playerPrefab, person.Position, rotation);
 
         PlayerInstance playerInstance = new PlayerInstance
         {
-            Id = persons.Id,
+            Id = person.Id,
             PlayerObject = playerObject,
-            Speed = persons.Speed
+            Speed = person.Speed
         };
         playerInstances.Add(playerInstance);
     }

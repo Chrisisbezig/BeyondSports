@@ -39,7 +39,7 @@ public class ReplayManager : MonoBehaviour
         JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
 
         Debug.Log($"Frame={startingframe.FrameCount}, Time={startingframe.TimestampUTC}"); // WORKS
-        Debug.Log($"Persons={startingframe.Persons.Length}"); // Doesnt work
+        Debug.Log($"Persons={startingframe.Persons.Count}"); // works
 
         PlayerManager.instance.InitializePlayers(startingframe);
 
@@ -53,8 +53,8 @@ public class ReplayManager : MonoBehaviour
     // https://learn.microsoft.com/en-us/dotnet/csharp/how-to/parse-strings-using-split
     private string GetJsonFrame(int frameindex)
     {
-        string[] frameData = jsonFile.text.Split(new char[] { ' ' , '\t', '\n' }, System.StringSplitOptions.None);
-        Debug.Log($"Data: {frameData[0]}");
-        return frameData[0];
+        string[] frameData = jsonFile.text.Split(new char[] { '\t', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+        Debug.Log($"Data: {frameData[frameindex]}");
+        return frameData[frameindex];
     }
 }
