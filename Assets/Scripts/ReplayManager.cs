@@ -10,7 +10,7 @@ public class ReplayManager : MonoBehaviour
     private static TextAsset jsonFile;
     private static string[] frameData;
 
-    [SerializeField] private float replaySpeedFps = 1.0f;
+    [SerializeField, Range(0.1f, 5f)] private float replaySpeed = 1.0f;
 
     [SerializeField] public Color refereeColor;
     [SerializeField] public Color team1Color;
@@ -56,11 +56,12 @@ public class ReplayManager : MonoBehaviour
         Debug.Log("Replay system initialized.");
     }
 
+    // Using a coroutine to handle the timings of the replay means that I can control the speed of the replay
     private IEnumerator ReplaySystem()
     {
         for (int i = 0; i < frameData.Length; i++)
         {
-            yield return new WaitForSeconds(1 / replaySpeedFps);
+            yield return new WaitForSeconds(0.01667f / replaySpeed);
             string frame0 = frameData[i];
             JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
             
