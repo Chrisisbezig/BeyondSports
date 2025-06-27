@@ -31,7 +31,7 @@ public class ReplayManager : MonoBehaviour
 
     void Start()
     {
-        // Loading the JSON file from Resources folder
+        // Loading the JSON file from Resources folder, I use a resource folder to keep it organized
         jsonFile = Resources.Load<TextAsset>("jsonfile(2)");
         Debug.Log($"JSON file loaded: {jsonFile.name}");
 
@@ -56,7 +56,7 @@ public class ReplayManager : MonoBehaviour
         Debug.Log("Replay system initialized.");
     }
 
-    // Using a coroutine to handle the timings of the replay means that I can control the speed of the replay
+    // Using a coroutine to handle the timings of the replay means that I can control the speed of the replay really easily
     private IEnumerator ReplaySystem()
     {
         for (int i = 0; i < frameData.Length; i++)
@@ -71,7 +71,7 @@ public class ReplayManager : MonoBehaviour
         }
     }
 
-    // Gets the JSON frame data for a specific frame index
+    // First I will use the string split method to split the JSON file into frames, I can then use the JsonUtility for information on each frame
 
     // String information
     // https://learn.microsoft.com/en-us/dotnet/api/system.string?view=net-9.0&redirectedfrom=MSDN
