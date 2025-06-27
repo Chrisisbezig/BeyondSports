@@ -454,6 +454,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2284491115057367979, guid: cc4a2d9dfd68a5c4fb96c303b8de0ae6,
     type: 3}
+  TeamColors:
+  - {fileID: 2100000, guid: 18e08b74277de2743b3df58f3749adb9, type: 2}
+  - {fileID: 2100000, guid: 5408446f650315a4986a0db5f697c803, type: 2}
+  - {fileID: 2100000, guid: 3bd138bdac6a9604d92ef1f9d0ff2ea7, type: 2}
 --- !u!4 &415740381
 Transform:
   m_ObjectHideFlags: 0

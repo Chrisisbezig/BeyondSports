@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     private List<PlayerInstance> playerInstances = new List<PlayerInstance>();
 
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private Material[] TeamColors;
 
     void Awake()
     {
@@ -43,6 +44,8 @@ public class PlayerManager : MonoBehaviour
         Vector3 position = new Vector3(person.Position[0], person.Position[1], person.Position[2]);
         GameObject playerobject = Instantiate(playerPrefab, position, rotation);
 
+        PlayerCustomizations(person, playerobject);
+
         PlayerInstance playerinstance = new PlayerInstance
         {
             Id = person.Id,
@@ -50,6 +53,12 @@ public class PlayerManager : MonoBehaviour
             Speed = person.Speed
         };
         playerInstances.Add(playerinstance);
+    }
+
+    private void PlayerCustomizations(Person person, GameObject personObject)
+    {
+        personObject.name = $"Player_{person.Id}";
+        personObject.GetComponent<MeshRenderer>().material = TeamColors[person.TeamSide];
     }
 
     public void UpdatePlayerPositions(JsonFormat jsonData)
