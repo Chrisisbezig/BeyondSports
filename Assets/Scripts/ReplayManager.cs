@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class ReplayManager : MonoBehaviour
     private static string[] frameData;
 
     [Range(0.1f, 5f)] public float replaySpeed = 1.0f;
+    [NonSerialized] public int CurrentFrameIndex = 0;
 
     [SerializeField] public Color refereeColor;
     [SerializeField] public Color team1Color;
@@ -57,17 +59,20 @@ public class ReplayManager : MonoBehaviour
     }
 
     // Using a coroutine to handle the timings of the replay means that I can control the speed of the replay
+    // Using a while loop so it continues until all frames that are left are processed, so I can move the currentframeIndex back and forth without issues
     private IEnumerator ReplaySystem()
     {
-        for (int i = 0; i < frameData.Length; i++)
+        while (CurrentFrameIndex < frameData.Length)
         {
             yield return new WaitForSeconds(0.01667f / replaySpeed);
-            string frame0 = frameData[i];
+            string frame0 = frameData[CurrentFrameIndex];
             JsonFormat startingframe = JsonUtility.FromJson<JsonFormat>(frame0);
-            
+
             BallManager.instance.UpdateBallPositions(startingframe);
             PlayerManager.instance.UpdatePlayerPositions(startingframe);
             ScoreManager.instance.UpdateScore(startingframe);
+
+            CurrentFrameIndex++;
         }
     }
 
@@ -79,5 +84,10 @@ public class ReplayManager : MonoBehaviour
     private void CalculateJsonFrames()
     {
         frameData = jsonFile.text.Split(new char[] { '\t', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+    }
+
+    public int GetFrameCount()
+    {
+        return frameData.Length;
     }
 }
